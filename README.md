@@ -46,37 +46,39 @@ The model correctly reads PNEUMONIA at 100% confidence. Add the noise (middle: a
 
 ![Flip: pneumonia misread as normal](docs/images/flip1_pneumonia_to_normal.png)
 
-The model's internal probabilities before and after:
+### 4. Attack #2 — a false pneumonia alarm (false positive)
 
-![Diagnosis probabilities flipping](docs/images/flip1_probabilities.png)
+The reverse direction. A healthy X-ray the model correctly clears at 95% confidence becomes PNEUMONIA at 100% after the same trick:
 
-### 4. Interactive playground
+![Flip: normal misread as pneumonia](docs/images/flip2_normal_to_pneumonia.png)
 
-Pick any of the 624 test X-rays, drag the epsilon slider, watch the diagnosis flip live (ε = 0.20 shown):
+The model's internal probabilities during that flip — a complete reversal:
 
-![Interactive playground at epsilon 0.2](docs/images/playground_eps020.png)
+![Diagnosis probabilities flipping](docs/images/flip2_probabilities.png)
 
-![Playground probability bars](docs/images/playground_probabilities.png)
+### 5. Interactive playground
 
-### 5. How fast it collapses — accuracy vs attack strength
+Inside the notebook: pick any of the 624 test X-rays, drag the epsilon slider, and watch the diagnosis and its probability bars flip live. (It's a live widget, so it doesn't export as a static image — run the notebook to play with it.)
+
+### 6. How fast it collapses — accuracy vs attack strength
 
 FGSM on the full test set: 83% clean → 36% with near-invisible noise → 1.4% → 0%.
 
 ![Accuracy vs epsilon](docs/images/accuracy_vs_epsilon.png)
 
-### 6. FGSM vs PGD at equal budget
+### 7. FGSM vs PGD at equal budget
 
 One big step (FGSM) vs 20 small guided steps (PGD). Both saturate to ~0% by ε = 0.1; PGD is only marginally stronger here — see [the analysis](#fgsm-vs-pgd).
 
 ![FGSM vs PGD](docs/images/fgsm_vs_pgd.png)
 
-### 7. Gallery — four X-rays the detector would send home
+### 8. Gallery — four X-rays the detector would send home
 
 Top: real X-rays, correctly flagged as PNEUMONIA (97–100%). Bottom: attacked twins the detector now clears as NORMAL (99–100%).
 
 ![Attack gallery](docs/images/attack_gallery.png)
 
-### 8. Your own X-ray
+### 9. Your own X-ray
 
 The same attack applied to a user-uploaded X-ray from outside the dataset (note the domain gap — it still works): PNEUMONIA (96.4%) → NORMAL (99.7%).
 
