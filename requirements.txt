@@ -1,0 +1,7 @@
+# Only needed to run outside Google Colab (Colab has most of this preinstalled)
+torch>=2.6
+torchvision>=0.21
+medmnist>=3.0
+matplotlib>=3.8
+tqdm>=4.66
+ipywidgets>=8.0
